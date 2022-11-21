@@ -53,3 +53,9 @@ class Compra(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name='compras')
     status = models.IntegerField(choices=StatusCompra.choices, default=StatusCompra.CARINHO)
     
+
+class ItensCompra(models.Model):
+    compra = models.ForeignKey(Compra, on_delete=models.CASCADE, related_name='itens')
+    livro = models.ForeignKey(Livro, on_delete=models.PROTECT, related_name='+') # Adicionando o + o Django não gera o alto reverse no relacionamento
+    quantidade = models.IntegerField()
+

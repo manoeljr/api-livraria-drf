@@ -1,14 +1,17 @@
 from django.contrib import admin
 
-from core.models import Autor
-from core.models import Categoria
-from core.models import Editora
-from core.models import Livro
-from core.models import Compra
-
+from core.models import Autor, Categoria, Editora, Livro, Compra, ItensCompra
 
 admin.site.register(Categoria)
 admin.site.register(Editora)
 admin.site.register(Autor)
 admin.site.register(Livro)
-admin.site.register(Compra)
+
+
+class ItensInline(admin.TabularInline):
+    model = ItensCompra
+
+
+@admin.register(Compra)
+class CompraAdmin(admin.ModelAdmin):
+    inlines = (ItensInline,)
